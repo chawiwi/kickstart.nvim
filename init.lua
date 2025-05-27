@@ -273,13 +273,45 @@ require('lazy').setup({
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'BufReadPre',
     opts = {
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        add = {
+          hl = 'GitSignsAdd',
+          text = '+',
+          numhl = 'GitSignsAddNr',
+          linehl = 'GitSignsAddLn',
+        },
+        change = {
+          hl = 'GitSignsChange',
+          text = '|',
+          numhl = 'GitSignsChangeNr',
+          linehl = 'GitSignsChangeLn',
+        },
+        delete = {
+          hl = 'GitSignsDelete',
+          text = '_',
+          numhl = 'GitSignsDeleteNr',
+          linehl = 'GitSignsDeleteLn',
+        },
+        topdelete = {
+          hl = 'GitSignsAdd',
+          text = '‾',
+          numhl = 'GitSignsAddNr',
+          linehl = 'GitSignsAddLn',
+        },
+        changedelete = {
+          hl = 'GitSignsChange',
+          text = '~',
+          numhl = 'GitSignsChangeNr',
+          linehl = 'GitSignsChangeLn',
+        },
+        untracked = {
+          hl = 'GitSignsAdd',
+          text = '┆',
+          numhl = 'GitSignsAddNr',
+          linehl = 'GitSignsAddLn',
+        },
       },
       current_line_blame = true,
       numhl = true,
@@ -445,7 +477,7 @@ require('lazy').setup({
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
-          previewer = false,
+          previewer = true,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
